@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const { v4: uuidv4 } = require('uuid');
+
 
 app.get('/api/notes', (req, res) => {
 
@@ -17,6 +19,8 @@ app.post('api/notes', (req, res) => {
     const newNote = req.body;
 
     console.log("POST request - New Note: " + JSON.stringify(newNote));
+
+    newNote.id = uuidv4();
 
     let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
